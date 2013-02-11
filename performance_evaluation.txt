@@ -1,0 +1,38 @@
+Performance Evaluation - Matrix Sum
+----------------------
+Author: Christian Magnerfelt
+Email: magnerf@kth.se
+
+HARDWARE = Intel Core i7-2600 3,40 GHz ( 8 HW THREADS )
+OS = UBUNTU 64
+
+Each run is measured in seconds
+
+Test 1							
+Size	N = 1000						
+HW Threads		Run 1		Run 2		Run 3		Run 4		Run 5		Median		Speed Up
+1				0.00376249	0.00280091	0.00248635	0.00277298	0.00371289	0.00280091	1
+2				0.00179297	0.00212269	0.00216589	0.0023221	0.00196981	0.00212269	1.3195096788
+3				0.00142393	0.000983645	0.00289618	0.00123256	0.00186169	0.00142393	1.9670278736
+4				0.00149345	0.000678586	0.00124764	0.0013904	0.00163736	0.0013904	2.0144634638
+							
+Test 2							
+Size	N = 5000						
+HW Threads		Run 1		Run 2		Run 3		Run 4		Run 5		Median		Speed Up
+1				0.0831072	0.0855223	0.0848225	0.0816377	0.0821202	0.0831072	1
+2				0.0496826	0.0494918	0.0533858	0.0493747	0.0491954	0.0494918	1.6792115057
+3				0.0399724	0.0406306	0.0373791	0.0374838	0.0370947	0.0374838	2.2171498087
+4				0.033637	0.0349137	0.0338093	0.0329154	0.0326921	0.033637	2.4707078515
+							
+Test 3							
+Size	N = 10000						
+HW Threads		Run 1		Run 2		Run 3		Run 4		Run 5		Median		Speed Up
+1				0.334279	0.33644		0.336456	0.331584	0.337742	0.33644		1
+2				0.195048	0.192606	0.192144	0.192606	0.192651	0.192606	1.7467783974
+3				0.143999	0.147113	0.142572	0.143285	0.14785		0.143999	2.3364051139
+4				0.136457	0.127535	0.127684	0.136395	0.164255	0.136395	2.466659335
+
+Discussion:
+In all 3 tests we get a speed up. Note that we get a bigger speed up as the matrix size increases. This is probably due to the fact
+that each parallel for section works on its own row. The row size in this case is better balanced if the row is larger. It would have been intressting
+to test with variable row size/chunks the reasons for using a dynamic matrix stored as a single array on the heap.
